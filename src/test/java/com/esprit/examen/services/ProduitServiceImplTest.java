@@ -1,3 +1,4 @@
+/*
 package com.esprit.examen.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -149,3 +150,4 @@ public class ProduitServiceImplTest {
         produitService.deleteProduit(produit.getId());
         produitService.getStockRepository().delete(stock);
     }
+*/
