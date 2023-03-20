@@ -17,12 +17,7 @@ pipeline {
 
     }
 
-    agent {
-
-        label "agent"
-
-    } 
-
+    agent any
     stages {
 
         stage("Build Project") {
