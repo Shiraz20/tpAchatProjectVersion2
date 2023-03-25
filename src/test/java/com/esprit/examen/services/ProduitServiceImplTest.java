@@ -1,16 +1,15 @@
-/*
 package com.esprit.examen.services;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import com.esprit.examen.entities.DetailFacture;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -42,8 +41,8 @@ public class ProduitServiceImplTest {
     @Test
     public void testRetrieveAllProduits() {
         // Given
-        Produit produit1 = new Produit(1L, "Produit 1", "Description 1", new Date(), new CategorieProduit(), new Stock());
-        Produit produit2 = new Produit(2L, "Produit 2", "Description 2", new Date(), new CategorieProduit(), new Stock());
+        Produit produit1 =  new Produit(1L,"code","libelle",12F, new Date(),new Date(),new Stock(), (Set<DetailFacture>) new DetailFacture(),new CategorieProduit());
+        Produit produit2 =  new Produit(1L,"code","libelle",12F, new Date(),new Date(),new Stock(), (Set<DetailFacture>) new DetailFacture(),new CategorieProduit());
         List<Produit> produits = new ArrayList<>();
         produits.add(produit1);
         produits.add(produit2);
@@ -60,7 +59,7 @@ public class ProduitServiceImplTest {
     @Test
     public void testAddProduit() {
         // Given
-        Produit produit = new Produit(1L, "Produit 1", "Description 1", new Date(), new CategorieProduit(), new Stock());
+        Produit produit =  new Produit(1L,"code","libelle",12F, new Date(),new Date(),new Stock(), (Set<DetailFacture>) new DetailFacture(),new CategorieProduit());
         when(produitRepository.save(any(Produit.class))).thenReturn(produit);
 
         // When
@@ -86,7 +85,7 @@ public class ProduitServiceImplTest {
     @Test
     public void testUpdateProduit() {
         // Given
-        Produit produit = new Produit(1L, "Produit 1", "Description 1", new Date(), new CategorieProduit(), new Stock());
+        Produit produit =  new Produit(1L,"code","libelle",12F, new Date(),new Date(),new Stock(), (Set<DetailFacture>) new DetailFacture(),new CategorieProduit());
         when(produitRepository.save(any(Produit.class))).thenReturn(produit);
 
         // When
@@ -96,58 +95,32 @@ public class ProduitServiceImplTest {
         assertThat(result).isEqualTo(produit);
     }
 
-   
-    @Test
-    public void testRetrieveProduit() {
-        // Given
-        Produit produit = new Produit();
-        produit.setNom("Produit Test");
-        produit.setPrix(100.0);
-        produit.setDateCreation(new Date());
-        produit.setDescription("Description produit Test");
-        produit.setReference("Ref-Test");
-        produitService.addProduit(produit);
-
-        // When
-        Produit produitResult = produitService.retrieveProduit(produit.getId());
-
-        // Then
-        assertNotNull(produitResult);
-        assertEquals(produit.getNom(), produitResult.getNom());
-        assertEquals(produit.getPrix(), produitResult.getPrix());
-        assertEquals(produit.getDateCreation(), produitResult.getDateCreation());
-        assertEquals(produit.getDescription(), produitResult.getDescription());
-        assertEquals(produit.getReference(), produitResult.getReference());
-
-        // Clean-up
-        produitService.deleteProduit(produit.getId());
-    }
 
     @Test
     public void testAssignProduitToStock() {
         // Given
         Produit produit = new Produit();
-        produit.setNom("Produit Test");
-        produit.setPrix(100.0);
+        produit.setLibelleProduit("Produit Test");
+        produit.setPrix(100.0F);
         produit.setDateCreation(new Date());
-        produit.setDescription("Description produit Test");
-        produit.setReference("Ref-Test");
+        produit.setIdProduit(1L);
+        produit.setCodeProduit("Ref-Test");
         produitService.addProduit(produit);
 
         Stock stock = new Stock();
-        stock.setAdresse("Adresse Test");
-        stock.setCapacite(100);
-        produitService.getStockRepository().save(stock);
+        stock.setLibelleStock("Adresse Test");
+        stock.setQte(100);
+        stockRepository.save(stock);
 
         // When
-        produitService.assignProduitToStock(produit.getId(), stock.getId());
+        produitService.assignProduitToStock(produit.getIdProduit(), stock.getIdStock());
 
         // Then
-        Produit produitResult = produitService.retrieveProduit(produit.getId());
-        assertEquals(stock.getId(), produitResult.getStock().getId());
+        Produit produitResult = produitService.retrieveProduit(produit.getIdProduit());
+        assertEquals(stock.getIdStock(), produitResult.getStock().getIdStock());
 
         // Clean-up
-        produitService.deleteProduit(produit.getId());
-        produitService.getStockRepository().delete(stock);
+        produitService.deleteProduit(produit.getIdProduit());
+        stockRepository.delete(stock);
     }
-*/
+}
