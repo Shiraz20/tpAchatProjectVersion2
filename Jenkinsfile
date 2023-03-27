@@ -2,33 +2,80 @@ pipeline {
 
      environment {
 
-        DOCKER_REGISTRY = '172.10.0.140:8083'
-        DOCKER_IMAGE_NAME = 'sarahprojet'
-        DOCKER_IMAGE_TAG = 'latest'
-
-        NEXUS_REPOSITORY = 'my_repo'
-        NEXUS_REPOSITORY_MAVEN = 'maven-releases'
-        NEXUS_REPOSITORY_PATH = ''
-
-        CONTAINER_NAME = 'devopsSarah'
-
-        NEXUS_USERNAME = 'admin'
-        NEXUS_PASSWORD = 'admin'
+      registry = "sarahkhh/achat" 
+        registryCredential = 'dockerhub' 
+        dockerImage = ''
+        
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCAOL = "http"
+        NEXUS_URL = "172.10.0.140:8081"
+        NEXUS_REPOSITORY = "nexus-repo-devops"
+        NEXUS_CREDENTIAL_ID = "deploymentRepo"
 
     }
 
-    agent any
+     agent any
+    
     stages {
-
-        stage("Build Project") {
-
+        stage ('Checkout git') {
             steps {
-
-                sh "mvn clean package -DskipTests"
-
+                git branch: 'Devops-Produit' ,
+               url:'https://github.com/Shiraz20/tpAchatProjectVersion2.git'
             }
+        }
+        stage ('Maven Clean') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
 
-        }/*
+        stage ('Maven Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage ('Maven Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
+        stage ('Maven SonarQube') {
+            steps { 
+               withSonarQubeEnv('sq1') {
+               sh 'mvn sonar:sonar -Dsonar.login=b8f81399db39910c4a8481c9ba93188f7a5386cb'
+                                         }
+                     }
+
+       
+        }
+    
+        stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                                   }
+                } 
+            }
+        }
+        stage("PUBLISH TO NEXUS") {
+            steps {  
+                sh 'mvn deploy'
+            }
+                }
+        
+    
+
+        }
+        /*
 
         stage('Connection to Nexus') {
 
@@ -82,25 +129,7 @@ pipeline {
 
         }*/
 
-        stage('Down app'){
 
-          steps{
-
-            sh 'sudo docker-compose down'
-
-          }
-
-        }
-
-        stage('Run app with compose'){
-
-          steps{
-
-            sh 'sudo docker-compose up -d'
-
-          }
-
-        }
 
         
 
@@ -157,7 +186,7 @@ pipeline {
 
         }*/ 
 
-    }
+    
 
     post {
 
@@ -192,7 +221,8 @@ pipeline {
         }*/
 
     }
+}
 
     
 
-}
+
