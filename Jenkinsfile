@@ -74,7 +74,7 @@ pipeline {
     
            stage("Docker-compose") {
                 steps{
-                    sh 'docker-compose up -d --force-recreate --build'
+                    sh 'docker-compose up'
                      }
            }
         
