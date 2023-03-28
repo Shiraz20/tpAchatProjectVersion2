@@ -1,14 +1,5 @@
 pipeline {
     environment { 
-        registry = "sarahkhh/achat" 
-        registryCredential = 'dockerhub' 
-        dockerImage = ''
-        
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCAOL = "http"
-        NEXUS_URL = "172.10.0.140:8081"
-        NEXUS_REPOSITORY = "nexus-repo-devops"
-        NEXUS_CREDENTIAL_ID = "deploymentRepo"
                 }
     
     agent any
