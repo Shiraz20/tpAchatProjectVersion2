@@ -11,8 +11,8 @@
    #     - /home/mysql/data:/var/lib/mysql
 
     spring_app:
-      image: sarahkhh/achat
-      container_name: achat
+      image: achat
+      container_name: achat-aicha
       restart: on-failure
       ports:
         - 7000:7000

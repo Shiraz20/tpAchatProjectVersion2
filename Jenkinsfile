@@ -14,17 +14,10 @@ pipeline {
     agent any
     
     stages {
-        
-        stage ('Checkout git') {
-            steps {
-                git branch: 'Devops-Facture' ,
-                url:'https://github.com/Shiraz20/tpAchatProjectVersion2.git'
-                  }
-              }
-        
+                
         stage ('Maven Clean') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean'
             }
         }
 
@@ -39,44 +32,6 @@ pipeline {
                 sh 'mvn package'
                   }
         }
-        
-            stage ('Maven SonarQube') {
-            steps { 
-               withSonarQubeEnv('sq1') {
-               sh 'mvn sonar:sonar -Dsonar.login=b8f81399db39910c4a8481c9ba93188f7a5386cb'
-                                       }
-                   }
-         }
-        
-             stage("PUBLISH TO NEXUS") {
-             steps {  
-                sh 'mvn deploy'
-                   }
-          }
-        
-             stage('Building our image') { 
-             steps { 
-                script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                        }
-                    } 
-           }
-        
-            stage('Deploy our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                        }
-                        } 
-                   }
-            }
-    
-           stage("Docker-compose") {
-                steps{
-                    sh 'docker-compose up -d --force-recreate --build'
-                     }
-           }
         
     }
 }
