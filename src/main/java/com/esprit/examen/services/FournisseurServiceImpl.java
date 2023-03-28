@@ -3,7 +3,6 @@ package com.esprit.examen.services;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class FournisseurServiceImpl implements IFournisseurService {
 
 	@Override
 	public List<Fournisseur> retrieveAllFournisseurs() {
-		List<Fournisseur> fournisseurs = (List<Fournisseur>) fournisseurRepository.findAll();
+		List<Fournisseur> fournisseurs =  fournisseurRepository.findAll();
 		for (Fournisseur fournisseur : fournisseurs) {
 			log.info(" fournisseur : " + fournisseur);
 		}
@@ -64,26 +63,19 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	@Override
 	public void deleteFournisseur(Long fournisseurId) {
 		fournisseurRepository.deleteById(fournisseurId);
-
 	}
 
 	@Override
 	public Fournisseur retrieveFournisseur(Long fournisseurId) {
-
-		Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);
-		return fournisseur;
+		return fournisseurRepository.findById(fournisseurId).orElse(null);
 	}
 
 	@Override
 	public void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur) {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
 		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
-        fournisseur.getSecteurActivites().add(secteurActivite);
-        fournisseurRepository.save(fournisseur);
-		
-		
+		if (fournisseur != null) {
+			fournisseur.getSecteurActivites().add(secteurActivite);
+		}
 	}
-
-	
-
 }
