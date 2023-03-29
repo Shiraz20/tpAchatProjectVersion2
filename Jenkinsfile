@@ -74,8 +74,8 @@ pipeline {
     
            stage("Docker-compose") {
                 steps{
-                      sh 'sudo docker-compose down'
-                      sh 'sudo docker-compose up -d'
+                      sh 'docker-compose down'
+                      sh 'docker-compose up -d'
                      }
            }
            stage('sending mail'){
