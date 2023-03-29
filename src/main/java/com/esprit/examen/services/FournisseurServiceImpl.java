@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.esprit.examen.entities.DTO.FournisseurDTO;
+import com.esprit.examen.entities.dto.FournisseurDTO;
 import com.esprit.examen.services.mapper.FournisseurMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

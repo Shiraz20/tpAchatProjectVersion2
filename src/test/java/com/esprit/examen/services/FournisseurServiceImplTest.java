@@ -1,7 +1,7 @@
 package com.esprit.examen.services;
 
 import com.esprit.examen.entities.*;
-import com.esprit.examen.entities.DTO.FournisseurDTO;
+import com.esprit.examen.entities.dto.FournisseurDTO;
 import com.esprit.examen.repositories.DetailFournisseurRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
 import com.esprit.examen.repositories.ProduitRepository;

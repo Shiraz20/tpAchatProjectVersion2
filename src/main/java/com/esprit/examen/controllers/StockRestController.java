@@ -4,7 +4,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
-import com.esprit.examen.entities.DTO.StockDTO;
+import com.esprit.examen.entities.dto.StockDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
