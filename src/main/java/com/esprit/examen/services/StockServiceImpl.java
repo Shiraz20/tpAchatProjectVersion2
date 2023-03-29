@@ -6,19 +6,22 @@ import java.util.List;
 
 import com.esprit.examen.entities.dto.StockDTO;
 import com.esprit.examen.services.mapper.StockMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.StockRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 public class StockServiceImpl implements IStockService {
 
 	@Autowired
 	StockRepository stockRepository;
+	@Autowired
 	StockMapper stockMapper;
+	Logger log = LoggerFactory.getLogger(StockServiceImpl.class);
 
 
 	@Override
@@ -34,7 +37,6 @@ public class StockServiceImpl implements IStockService {
 
 	@Override
 	public Stock addStock(StockDTO s) {
-		// récuperer la date à l'instant t1
 		log.info("In method addStock");
 		Stock stock=stockMapper.toEntity(s);
 		return stockRepository.save(stock);
