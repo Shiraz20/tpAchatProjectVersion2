@@ -3,39 +3,43 @@ package com.esprit.examen.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import com.esprit.examen.entities.dto.StockDTO;
+import com.esprit.examen.services.mapper.StockMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.StockRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 public class StockServiceImpl implements IStockService {
 
 	@Autowired
 	StockRepository stockRepository;
+	@Autowired
+	StockMapper stockMapper;
+	Logger log = LoggerFactory.getLogger(StockServiceImpl.class);
 
 
 	@Override
 	public List<Stock> retrieveAllStocks() {
-		// récuperer la date à l'instant t1
 		log.info("In method retrieveAllStocks");
-		List<Stock> stocks = (List<Stock>) stockRepository.findAll();
+		List<Stock> stocks = stockRepository.findAll();
 		for (Stock stock : stocks) {
 			log.info(" Stock : " + stock);
 		}
 		log.info("out of method retrieveAllStocks");
-		// récuperer la date à l'instant t2
-		// temps execution = t2 - t1
 		return stocks;
 	}
 
 	@Override
-	public Stock addStock(Stock s) {
-		// récuperer la date à l'instant t1
+	public Stock addStock(StockDTO s) {
 		log.info("In method addStock");
-		return stockRepository.save(s);
+		Stock stock=stockMapper.toEntity(s);
+		return stockRepository.save(stock);
 		
 	}
 
@@ -47,9 +51,10 @@ public class StockServiceImpl implements IStockService {
 	}
 
 	@Override
-	public Stock updateStock(Stock s) {
+	public Stock updateStock(StockDTO s) {
 		log.info("In method updateStock");
-		return stockRepository.save(s);
+		Stock stock=stockMapper.toEntity(s);
+		return stockRepository.save(stock);
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class StockServiceImpl implements IStockService {
 		String msgDate = sdf.format(now);
 		String finalMessage = "";
 		String newLine = System.getProperty("line.separator");
-		List<Stock> stocksEnRouge = (List<Stock>) stockRepository.retrieveStatusStock();
+		List<Stock> stocksEnRouge = stockRepository.retrieveStatusStock();
 		for (int i = 0; i < stocksEnRouge.size(); i++) {
 			finalMessage = newLine + finalMessage + msgDate + newLine + ": le stock "
 					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
