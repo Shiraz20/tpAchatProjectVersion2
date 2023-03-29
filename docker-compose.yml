@@ -11,10 +11,10 @@
    #     - /home/mysql/data:/var/lib/mysql
 
     spring_app:
-      image: ahlemjebali/achatimage
-      container_name: achatimage
+      image: oumaymaayadi/devopsimage
+      container_name: achatproject
       restart: on-failure
       ports:
-        - 9001:9001
+        - 7000:7000
       depends_on:
         - mysqldb
