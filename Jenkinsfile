@@ -78,6 +78,13 @@ pipeline {
                       sh 'sudo docker-compose up -d'
                      }
            }
+           stage('sending mail'){
+               steps {
+                     mail bcc: '', body: '''Hello from Jenkins,
+                     Devops Pipeline returned success.
+            Best Regards''', cc: '', from: ' sarah.khabthani@esprit.tn', replyTo: ' sarah.khabthani@esprit.tn', subject: 'Devops Pipeline', to: 'sarahkhabthani9@gmail.com'
+                     }
+           }
         
     }
 }
