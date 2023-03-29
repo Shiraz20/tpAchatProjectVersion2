@@ -2,6 +2,9 @@ package com.esprit.examen.services;
 
 import java.util.List;
 import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,6 @@ import com.esprit.examen.repositories.StockRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class ProduitServiceImpl implements IProduitService {
 
 	@Autowired
@@ -22,6 +24,7 @@ public class ProduitServiceImpl implements IProduitService {
 	StockRepository stockRepository;
 	@Autowired
 	CategorieProduitRepository categorieProduitRepository;
+	Logger log = LoggerFactory.getLogger(ProduitServiceImpl.class);
 
 	@Override
 	public List<Produit> retrieveAllProduits() {
