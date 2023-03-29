@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.DetailFacture;
@@ -19,9 +22,12 @@ import com.esprit.examen.repositories.ProduitRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 @Transactional
 public class FactureServiceImpl implements IFactureService {
+
+	Logger log = LoggerFactory.getLogger(FactureServiceImpl.class);
+
 
 	@Autowired
 	FactureRepository factureRepository;

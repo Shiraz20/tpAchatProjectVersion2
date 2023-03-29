@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.esprit.examen.entities.dto.FournisseurDTO;
 import com.esprit.examen.services.mapper.FournisseurMapper;
+import org.mapstruct.Qualifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.DetailFournisseur;
@@ -15,12 +18,12 @@ import com.esprit.examen.repositories.DetailFournisseurRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.SecteurActiviteRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+
 public class FournisseurServiceImpl implements IFournisseurService {
 
+    Logger log = LoggerFactory.getLogger(FournisseurServiceImpl.class);
     @Autowired
     FournisseurRepository fournisseurRepository;
     @Autowired
@@ -29,7 +32,9 @@ public class FournisseurServiceImpl implements IFournisseurService {
     ProduitRepository produitRepository;
     @Autowired
     SecteurActiviteRepository secteurActiviteRepository;
+    @Autowired
     FournisseurMapper fournisseurMapper;
+
 
 
 

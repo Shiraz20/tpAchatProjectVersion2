@@ -34,24 +34,26 @@ class FournisseurServiceImplTest {
     void testRetrieveAllFournisseurs() {
         // Setup
         // Configure FournisseurRepository.findAll(...).
-        final List<Fournisseur> fournisseurs = Arrays.asList(
-                new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                        new HashSet<>(Arrays.asList(
-                                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite",
-                                        new HashSet<>()))),
-                        new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                "adresse", "matricule", null)));
+        final Fournisseur fournisseur = new Fournisseur();
+        fournisseur.setIdFournisseur(0L);
+        fournisseur.setCode("code");
+        fournisseur.setLibelle("libelle");
+        fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture = new Facture();
+        facture.setIdFacture(0L);
+        facture.setMontantRemise(0.0f);
+        facture.setMontantFacture(0.0f);
+        facture.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur.setFactures(new HashSet<>(Arrays.asList(facture)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
+        final List<Fournisseur> fournisseurs = Arrays.asList(fournisseur);
         when(fournisseurServiceImplUnderTest.fournisseurRepository.findAll()).thenReturn(fournisseurs);
 
         // Run the test
@@ -96,44 +98,48 @@ class FournisseurServiceImplTest {
         f.setDetailFournisseur(detailFournisseur);
 
         // Configure FournisseurMapper.toEntity(...).
-        final Fournisseur fournisseur1 = new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE,
-                new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                new HashSet<>(Arrays.asList(
-                        new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>()))),
-                new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                        "adresse", "matricule", null));
+        final Fournisseur fournisseur1 = new Fournisseur();
+        fournisseur1.setIdFournisseur(0L);
+        fournisseur1.setCode("code");
+        fournisseur1.setLibelle("libelle");
+        fournisseur1.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture1 = new Facture();
+        facture1.setIdFacture(0L);
+        facture1.setMontantRemise(0.0f);
+        facture1.setMontantFacture(0.0f);
+        facture1.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture1.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture1.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture1.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur1.setFactures(new HashSet<>(Arrays.asList(facture1)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur1.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
         when(fournisseurServiceImplUnderTest.fournisseurMapper.toEntity(any(FournisseurDTO.class)))
                 .thenReturn(fournisseur1);
 
         // Configure FournisseurRepository.save(...).
-        final Fournisseur fournisseur2 = new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE,
-                new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                new HashSet<>(Arrays.asList(
-                        new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>()))),
-                new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                        "adresse", "matricule", null));
+        final Fournisseur fournisseur2 = new Fournisseur();
+        fournisseur2.setIdFournisseur(0L);
+        fournisseur2.setCode("code");
+        fournisseur2.setLibelle("libelle");
+        fournisseur2.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture2 = new Facture();
+        facture2.setIdFacture(0L);
+        facture2.setMontantRemise(0.0f);
+        facture2.setMontantFacture(0.0f);
+        facture2.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture2.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture2.setArchivee(false);
+        final DetailFacture detailFacture1 = new DetailFacture();
+        detailFacture1.setIdDetailFacture(0L);
+        detailFacture1.setQteCommandee(0);
+        facture2.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture1)));
+        fournisseur2.setFactures(new HashSet<>(Arrays.asList(facture2)));
+        final SecteurActivite secteurActivite1 = new SecteurActivite();
+        fournisseur2.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite1)));
         when(fournisseurServiceImplUnderTest.fournisseurRepository.save(any(Fournisseur.class)))
                 .thenReturn(fournisseur2);
 
@@ -168,67 +174,72 @@ class FournisseurServiceImplTest {
         f.setDetailFournisseur(detailFournisseur);
 
         // Configure DetailFournisseurRepository.save(...).
-        final DetailFournisseur detailFournisseur1 = new DetailFournisseur(0L, "email",
-                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), "adresse", "matricule",
-                new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                        new HashSet<>(Arrays.asList(
-                                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite",
-                                        new HashSet<>()))), null));
+        final DetailFournisseur detailFournisseur1 = new DetailFournisseur();
+        detailFournisseur1.setIdDetailFournisseur(0L);
+        detailFournisseur1.setEmail("email");
+        detailFournisseur1.setDateDebutCollaboration(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        detailFournisseur1.setAdresse("adresse");
+        detailFournisseur1.setMatricule("matricule");
+        final Fournisseur fournisseur1 = new Fournisseur();
+        fournisseur1.setIdFournisseur(0L);
+        fournisseur1.setCode("code");
+        fournisseur1.setLibelle("libelle");
+        fournisseur1.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture1 = new Facture();
+        facture1.setIdFacture(0L);
+        facture1.setMontantRemise(0.0f);
+        facture1.setMontantFacture(0.0f);
+        facture1.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        fournisseur1.setFactures(new HashSet<>(Arrays.asList(facture1)));
+        detailFournisseur1.setFournisseur(fournisseur1);
         when(fournisseurServiceImplUnderTest.detailFournisseurRepository.save(any(DetailFournisseur.class)))
                 .thenReturn(detailFournisseur1);
 
         // Configure FournisseurMapper.toEntity(...).
-        final Fournisseur fournisseur1 = new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE,
-                new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                new HashSet<>(Arrays.asList(
-                        new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>()))),
-                new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                        "adresse", "matricule", null));
+        final Fournisseur fournisseur2 = new Fournisseur();
+        fournisseur2.setIdFournisseur(0L);
+        fournisseur2.setCode("code");
+        fournisseur2.setLibelle("libelle");
+        fournisseur2.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture2 = new Facture();
+        facture2.setIdFacture(0L);
+        facture2.setMontantRemise(0.0f);
+        facture2.setMontantFacture(0.0f);
+        facture2.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture2.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture2.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture2.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur2.setFactures(new HashSet<>(Arrays.asList(facture2)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur2.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
         when(fournisseurServiceImplUnderTest.fournisseurMapper.toEntity(any(FournisseurDTO.class)))
-                .thenReturn(fournisseur1);
+                .thenReturn(fournisseur2);
 
         // Configure FournisseurRepository.save(...).
-        final Fournisseur fournisseur2 = new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE,
-                new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                new HashSet<>(Arrays.asList(
-                        new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>()))),
-                new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                        "adresse", "matricule", null));
+        final Fournisseur fournisseur3 = new Fournisseur();
+        fournisseur3.setIdFournisseur(0L);
+        fournisseur3.setCode("code");
+        fournisseur3.setLibelle("libelle");
+        fournisseur3.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture3 = new Facture();
+        facture3.setIdFacture(0L);
+        facture3.setMontantRemise(0.0f);
+        facture3.setMontantFacture(0.0f);
+        facture3.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture3.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture3.setArchivee(false);
+        final DetailFacture detailFacture1 = new DetailFacture();
+        detailFacture1.setIdDetailFacture(0L);
+        detailFacture1.setQteCommandee(0);
+        facture3.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture1)));
+        fournisseur3.setFactures(new HashSet<>(Arrays.asList(facture3)));
+        final SecteurActivite secteurActivite1 = new SecteurActivite();
+        fournisseur3.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite1)));
         when(fournisseurServiceImplUnderTest.fournisseurRepository.save(any(Fournisseur.class)))
-                .thenReturn(fournisseur2);
+                .thenReturn(fournisseur3);
 
         // Run the test
         final FournisseurDTO result = fournisseurServiceImplUnderTest.updateFournisseur(f);
@@ -252,24 +263,26 @@ class FournisseurServiceImplTest {
     void testRetrieveFournisseur() {
         // Setup
         // Configure FournisseurRepository.findById(...).
-        final Optional<Fournisseur> fournisseur = Optional.of(
-                new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                        new HashSet<>(Arrays.asList(
-                                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite",
-                                        new HashSet<>()))),
-                        new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                "adresse", "matricule", null)));
+        final Fournisseur fournisseur1 = new Fournisseur();
+        fournisseur1.setIdFournisseur(0L);
+        fournisseur1.setCode("code");
+        fournisseur1.setLibelle("libelle");
+        fournisseur1.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture = new Facture();
+        facture.setIdFacture(0L);
+        facture.setMontantRemise(0.0f);
+        facture.setMontantFacture(0.0f);
+        facture.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur1.setFactures(new HashSet<>(Arrays.asList(facture)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur1.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
+        final Optional<Fournisseur> fournisseur = Optional.of(fournisseur1);
         when(fournisseurServiceImplUnderTest.fournisseurRepository.findById(0L)).thenReturn(fournisseur);
 
         // Run the test
@@ -294,47 +307,49 @@ class FournisseurServiceImplTest {
     void testAssignSecteurActiviteToFournisseur() {
         // Setup
         // Configure FournisseurRepository.findById(...).
-        final Optional<Fournisseur> fournisseur = Optional.of(
-                new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                        new HashSet<>(Arrays.asList(
-                                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite",
-                                        new HashSet<>()))),
-                        new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                "adresse", "matricule", null)));
+        final Fournisseur fournisseur1 = new Fournisseur();
+        fournisseur1.setIdFournisseur(0L);
+        fournisseur1.setCode("code");
+        fournisseur1.setLibelle("libelle");
+        fournisseur1.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture = new Facture();
+        facture.setIdFacture(0L);
+        facture.setMontantRemise(0.0f);
+        facture.setMontantFacture(0.0f);
+        facture.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur1.setFactures(new HashSet<>(Arrays.asList(facture)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur1.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
+        final Optional<Fournisseur> fournisseur = Optional.of(fournisseur1);
         when(fournisseurServiceImplUnderTest.fournisseurRepository.findById(0L)).thenReturn(fournisseur);
 
         // Configure SecteurActiviteRepository.findById(...).
-        final Optional<SecteurActivite> secteurActivite = Optional.of(
-                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>(Arrays.asList(
-                        new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(
-                                Arrays.asList(new Facture(0L, 0.0f, 0.0f,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false,
-                                        new HashSet<>(Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                                new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                        new Stock(0L, "libelleStock", 0, 0, new HashSet<>()),
-                                                        new HashSet<>(),
-                                                        new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                                new HashSet<>())), null))), null, new HashSet<>(
-                                        Arrays.asList(new Reglement(0L, 0.0f, 0.0f, false,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                                new HashSet<>(), new DetailFournisseur(0L, "email",
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), "adresse", "matricule",
-                                null))))));
-        when(fournisseurServiceImplUnderTest.secteurActiviteRepository.findById(0L)).thenReturn(secteurActivite);
+        final SecteurActivite secteurActivite2 = new SecteurActivite();
+        secteurActivite2.setIdSecteurActivite(0L);
+        secteurActivite2.setCodeSecteurActivite("codeSecteurActivite");
+        secteurActivite2.setLibelleSecteurActivite("libelleSecteurActivite");
+        final Fournisseur fournisseur2 = new Fournisseur();
+        fournisseur2.setIdFournisseur(0L);
+        fournisseur2.setCode("code");
+        fournisseur2.setLibelle("libelle");
+        fournisseur2.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture1 = new Facture();
+        facture1.setIdFacture(0L);
+        facture1.setMontantRemise(0.0f);
+        facture1.setMontantFacture(0.0f);
+        facture1.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture1.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture1.setArchivee(false);
+        fournisseur2.setFactures(new HashSet<>(Arrays.asList(facture1)));
+        secteurActivite2.setFournisseurs(new HashSet<>(Arrays.asList(fournisseur2)));
+        final Optional<SecteurActivite> secteurActivite1 = Optional.of(secteurActivite2);
+        when(fournisseurServiceImplUnderTest.secteurActiviteRepository.findById(0L)).thenReturn(secteurActivite1);
 
         // Run the test
         fournisseurServiceImplUnderTest.assignSecteurActiviteToFournisseur(0L, 0L);
@@ -348,25 +363,25 @@ class FournisseurServiceImplTest {
         when(fournisseurServiceImplUnderTest.fournisseurRepository.findById(0L)).thenReturn(Optional.empty());
 
         // Configure SecteurActiviteRepository.findById(...).
-        final Optional<SecteurActivite> secteurActivite = Optional.of(
-                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite", new HashSet<>(Arrays.asList(
-                        new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(
-                                Arrays.asList(new Facture(0L, 0.0f, 0.0f,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false,
-                                        new HashSet<>(Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                                new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                        new Stock(0L, "libelleStock", 0, 0, new HashSet<>()),
-                                                        new HashSet<>(),
-                                                        new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                                new HashSet<>())), null))), null, new HashSet<>(
-                                        Arrays.asList(new Reglement(0L, 0.0f, 0.0f, false,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                                new HashSet<>(), new DetailFournisseur(0L, "email",
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), "adresse", "matricule",
-                                null))))));
+        final SecteurActivite secteurActivite1 = new SecteurActivite();
+        secteurActivite1.setIdSecteurActivite(0L);
+        secteurActivite1.setCodeSecteurActivite("codeSecteurActivite");
+        secteurActivite1.setLibelleSecteurActivite("libelleSecteurActivite");
+        final Fournisseur fournisseur = new Fournisseur();
+        fournisseur.setIdFournisseur(0L);
+        fournisseur.setCode("code");
+        fournisseur.setLibelle("libelle");
+        fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture = new Facture();
+        facture.setIdFacture(0L);
+        facture.setMontantRemise(0.0f);
+        facture.setMontantFacture(0.0f);
+        facture.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setArchivee(false);
+        fournisseur.setFactures(new HashSet<>(Arrays.asList(facture)));
+        secteurActivite1.setFournisseurs(new HashSet<>(Arrays.asList(fournisseur)));
+        final Optional<SecteurActivite> secteurActivite = Optional.of(secteurActivite1);
         when(fournisseurServiceImplUnderTest.secteurActiviteRepository.findById(0L)).thenReturn(secteurActivite);
 
         // Run the test
@@ -379,24 +394,26 @@ class FournisseurServiceImplTest {
     void testAssignSecteurActiviteToFournisseur_SecteurActiviteRepositoryReturnsAbsent() {
         // Setup
         // Configure FournisseurRepository.findById(...).
-        final Optional<Fournisseur> fournisseur = Optional.of(
-                new Fournisseur(0L, "code", "libelle", CategorieFournisseur.ORDINAIRE, new HashSet<>(Arrays.asList(
-                        new Facture(0L, 0.0f, 0.0f, new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), false, new HashSet<>(
-                                Arrays.asList(new DetailFacture(0L, 0, 0.0f, 0, 0.0f,
-                                        new Produit(0L, "codeProduit", "libelleProduit", 0.0f,
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                                new Stock(0L, "libelleStock", 0, 0, new HashSet<>()), new HashSet<>(),
-                                                new CategorieProduit(0L, "codeCategorie", "libelleCategorie",
-                                                        new HashSet<>())), null))), null, new HashSet<>(Arrays.asList(
-                                new Reglement(0L, 0.0f, 0.0f, false,
-                                        new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(), null)))))),
-                        new HashSet<>(Arrays.asList(
-                                new SecteurActivite(0L, "codeSecteurActivite", "libelleSecteurActivite",
-                                        new HashSet<>()))),
-                        new DetailFournisseur(0L, "email", new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime(),
-                                "adresse", "matricule", null)));
+        final Fournisseur fournisseur1 = new Fournisseur();
+        fournisseur1.setIdFournisseur(0L);
+        fournisseur1.setCode("code");
+        fournisseur1.setLibelle("libelle");
+        fournisseur1.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+        final Facture facture = new Facture();
+        facture.setIdFacture(0L);
+        facture.setMontantRemise(0.0f);
+        facture.setMontantFacture(0.0f);
+        facture.setDateCreationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setDateDerniereModificationFacture(new GregorianCalendar(2020, Calendar.JANUARY, 1).getTime());
+        facture.setArchivee(false);
+        final DetailFacture detailFacture = new DetailFacture();
+        detailFacture.setIdDetailFacture(0L);
+        detailFacture.setQteCommandee(0);
+        facture.setDetailsFacture(new HashSet<>(Arrays.asList(detailFacture)));
+        fournisseur1.setFactures(new HashSet<>(Arrays.asList(facture)));
+        final SecteurActivite secteurActivite = new SecteurActivite();
+        fournisseur1.setSecteurActivites(new HashSet<>(Arrays.asList(secteurActivite)));
+        final Optional<Fournisseur> fournisseur = Optional.of(fournisseur1);
         when(fournisseurServiceImplUnderTest.fournisseurRepository.findById(0L)).thenReturn(fournisseur);
 
         when(fournisseurServiceImplUnderTest.secteurActiviteRepository.findById(0L)).thenReturn(Optional.empty());

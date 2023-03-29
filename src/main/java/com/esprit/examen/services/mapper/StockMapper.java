@@ -6,4 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface StockMapper extends EntityMapper<StockDTO, Stock> {
+    Stock toEntity(StockDTO stockDTO);
 }

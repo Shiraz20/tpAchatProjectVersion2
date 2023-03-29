@@ -6,4 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface FournisseurMapper extends EntityMapper<FournisseurDTO, Fournisseur> {
+    Fournisseur toEntity(FournisseurDTO fournisseurDTO);
 }
