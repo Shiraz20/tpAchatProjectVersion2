@@ -12,6 +12,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 public class Produit implements Serializable {
@@ -39,6 +43,13 @@ public class Produit implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	private CategorieProduit categorieProduit;
+
+	public Produit() {
+
+	}
+
+	public Produit(Object o, String p001, String s, float v, Date date, Object o1, Object o2, Object o3, Object o4) {
+	}
 
 
 	public Long getIdProduit() {
@@ -112,4 +123,15 @@ public class Produit implements Serializable {
 	public void setCategorieProduit(CategorieProduit categorieProduit) {
 		this.categorieProduit = categorieProduit;
 	}
+
+	public Produit(Long idProduit, String codeProduit, String libelleProduit, Date dateCreation, Date dateDerniereModification) {
+		this.idProduit = idProduit;
+		this.codeProduit = codeProduit;
+		this.libelleProduit = libelleProduit;
+		this.dateCreation = dateCreation;
+		this.dateDerniereModification = dateDerniereModification;
+
+	}
+	
+
 }
