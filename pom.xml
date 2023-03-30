@@ -103,6 +103,11 @@
 			<name>nexus</name>
 			<url>http://172.10.0.140:8081/repository/maven-releases/</url>
 		</repository>
+		<snapshotRepository>
+    			<id>deploymentRepo</id>
+    			<name>Snapshots</name>
+   			<url>http://172.10.0.140:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<build>
 		<plugins>
@@ -140,6 +145,15 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.5.201505241946</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
