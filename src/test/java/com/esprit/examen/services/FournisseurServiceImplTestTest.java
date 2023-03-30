@@ -4,6 +4,7 @@ import com.esprit.examen.entities.CategorieFournisseur;
 import com.esprit.examen.entities.DetailFacture;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Fournisseur;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,8 +26,7 @@ class FournisseurServiceImplTestTest {
 
     @Test
     void testTestRetrieveAllFournisseurs() {
-        // Setup
-        // Configure IFournisseurService.retrieveAllFournisseurs(...).
+
         final Fournisseur fournisseur = new Fournisseur();
         fournisseur.setIdFournisseur(0L);
         fournisseur.setCode("code");
@@ -50,6 +50,7 @@ class FournisseurServiceImplTestTest {
 
         // Run the test
         fournisseurServiceImplTestUnderTest.TestRetrieveAllFournisseurs();
+        Assertions.assertNotNull(fournisseur);
 
         // Verify the results
     }
