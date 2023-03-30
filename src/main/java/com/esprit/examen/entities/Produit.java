@@ -48,6 +48,10 @@ public class Produit implements Serializable {
 
 	}
 
+	public Produit(Object o, String p001, String s, float v, Date date, Object o1, Object o2, Object o3, Object o4) {
+	}
+
+
 	public Long getIdProduit() {
 		return idProduit;
 	}
