@@ -18,10 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Produit implements Serializable {
 
 	/**
@@ -48,6 +44,81 @@ public class Produit implements Serializable {
 	@JsonIgnore
 	private CategorieProduit categorieProduit;
 
+	public Produit() {
+
+	}
+
+	public Long getIdProduit() {
+		return idProduit;
+	}
+
+	public void setIdProduit(Long idProduit) {
+		this.idProduit = idProduit;
+	}
+
+	public String getCodeProduit() {
+		return codeProduit;
+	}
+
+	public void setCodeProduit(String codeProduit) {
+		this.codeProduit = codeProduit;
+	}
+
+	public String getLibelleProduit() {
+		return libelleProduit;
+	}
+
+	public void setLibelleProduit(String libelleProduit) {
+		this.libelleProduit = libelleProduit;
+	}
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public Date getDateDerniereModification() {
+		return dateDerniereModification;
+	}
+
+	public void setDateDerniereModification(Date dateDerniereModification) {
+		this.dateDerniereModification = dateDerniereModification;
+	}
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+
+	public Set<DetailFacture> getDetailFacture() {
+		return detailFacture;
+	}
+
+	public void setDetailFacture(Set<DetailFacture> detailFacture) {
+		this.detailFacture = detailFacture;
+	}
+
+	public CategorieProduit getCategorieProduit() {
+		return categorieProduit;
+	}
+
+	public void setCategorieProduit(CategorieProduit categorieProduit) {
+		this.categorieProduit = categorieProduit;
+	}
 
 	public Produit(Long idProduit, String codeProduit, String libelleProduit, Date dateCreation, Date dateDerniereModification) {
 		this.idProduit = idProduit;
