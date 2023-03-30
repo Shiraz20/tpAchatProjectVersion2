@@ -97,12 +97,12 @@
 	</dependencies>
 
 	<distributionManagement>
-<!-- 		<repository>
+		<repository>
 			<id>deploymentRepo</id>
 			<layout>default</layout>
 			<name>nexus</name>
 			<url>http://172.10.0.140:8081/repository/maven-releases/</url>
-		</repository> -->
+		</repository>
 		<snapshotRepository>
     			<id>deploymentRepo</id>
     			<name>Snapshots</name>
