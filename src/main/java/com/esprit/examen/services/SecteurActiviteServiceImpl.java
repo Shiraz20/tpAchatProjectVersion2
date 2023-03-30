@@ -50,7 +50,7 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 	public SecteurActivite retrieveSecteurActivite(Long id) {
 		return secteurActiviteRepository.findById(id).orElse(null);
 	}
-
+//ons
 
 
 }
