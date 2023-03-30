@@ -24,6 +24,13 @@ public class SecteurActivite implements Serializable{
 	@JsonIgnore
 	private Set<Fournisseur> fournisseurs;
 
+    public SecteurActivite(String code1, long l, String libelle1) {
+    }
+
+	public SecteurActivite() {
+
+	}
+
 	public Long getIdSecteurActivite() {
 		return idSecteurActivite;
 	}

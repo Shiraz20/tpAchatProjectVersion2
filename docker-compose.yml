@@ -1,20 +1,19 @@
-  version: "3"
+version: "3"
 
-  services:
-    mysqldb:
-      container_name: mysqldb
-      image: mysql:8
-      restart: unless-stopped
-      environment:
-        MYSQL_ROOT_PASSWORD: root
-  #    volumes:
-   #     - /home/mysql/data:/var/lib/mysql
-
-    spring_app:
-      image: oumaymaayadi/devopsimage
-      container_name: achatproject
-      restart: on-failure
-      ports:
-        - 7000:7000
-      depends_on:
-        - mysqldb
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+ #   volumes:
+  #    - /home/mysql/data:/var/lib/mysql
+  spring_app:
+    image: onsjabeur/mydevopsimage
+    container_name: mydevopsimage
+    restart: on-failure
+    ports:
+      - 9001:9001
+    depends_on:
+      - mysqldb
