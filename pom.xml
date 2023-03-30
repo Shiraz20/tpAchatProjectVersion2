@@ -20,7 +20,7 @@
 		<sonar.language>java</sonar.language>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.sources>src/main</sonar.sources>
-		<sonar.tests>src/test</sonar.tests>
+		<sonar.tests>src/com.esprit.examen.test</sonar.tests>
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
 		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
@@ -49,14 +49,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-com.esprit.examen.test</artifactId>
+			<scope>com.esprit.examen.test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<scope>com.esprit.examen.test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

@@ -1,9 +1,11 @@
-package com.esprit.examen.services;
+package com.esprit.examen.test;
 
 
 
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.repositories.ProduitRepository;
+import com.esprit.examen.services.IProduitService;
+import com.esprit.examen.services.ProduitServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,7 +65,7 @@ public class ProduitServiceImplMockTest {
     @Test
     public void testDeleteProduit() {
         Produit produit = new Produit(1L, "COS","cosmetique", new Date(), new Date());
-        produit.setCodeProduit("new test");
+        produit.setCodeProduit("new com.esprit.examen.test");
         produitRepository = mock(ProduitRepository.class);
 
         when(produitRepository.findById(produit.getIdProduit())).thenReturn(Optional.of(produit));

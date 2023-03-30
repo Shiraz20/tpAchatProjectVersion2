@@ -1,4 +1,5 @@
-package com.esprit.examen.services;
+package com.esprit.examen.test;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.*;
 
 import com.esprit.examen.entities.DetailFacture;
+import com.esprit.examen.services.ProduitServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
