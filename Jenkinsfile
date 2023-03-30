@@ -39,19 +39,7 @@ pipeline {
                 sh 'mvn package'
                   }
         }
-        
-        stage('Cleaning up ') {
-            steps {
-                 sh "docker rmi $registry:$BUILD_NUMBER"
-                
-    }
-}
-        stage('docker compose') {
-            steps {
-                 sh "docker-compose up -d"
-                
-    }
-}
+       
         
         stage ('Maven SonarQube') {
             steps { 
@@ -84,6 +72,14 @@ pipeline {
                         } 
                    }
             }
+
+        stage('docker compose') {
+            steps {
+                sh "docker-compose down
+                 sh "docker-compose up -d"
+                
+    }
+}
     }
      post {
 
