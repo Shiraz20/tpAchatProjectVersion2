@@ -15,6 +15,6 @@ services:
     container_name: achatimage
     restart: on-failure
     ports:
-      - 3000:3000
+      - 9001:9001
     depends_on:
       - mysqldb
