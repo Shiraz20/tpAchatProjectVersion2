@@ -7,13 +7,14 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
- #   volumes:
-  #    - /home/mysql/data:/var/lib/mysql
+  #    volumes:
+  #     - /home/mysql/data:/var/lib/mysql
+
   spring_app:
-    image: onsjabeur/mydevopsimage
-    container_name: mydevopsimage
+    image: ahlemjebali/achatimage
+    container_name: achatimage
     restart: on-failure
     ports:
-      - 9001:9001
+      - 3000:3000
     depends_on:
       - mysqldb
