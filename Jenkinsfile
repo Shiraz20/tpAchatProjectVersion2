@@ -40,7 +40,20 @@ pipeline {
                   }
         }
         
-            stage ('Maven SonarQube') {
+        stage('Cleaning up ') {
+            steps {
+                 sh "docker rmi $registry:$BUILD_NUMBER"
+                
+    }
+}
+        stage('docker compose') {
+            steps {
+                 sh "docker-compose up -d"
+                
+    }
+}
+        
+        stage ('Maven SonarQube') {
             steps { 
                withSonarQubeEnv('sq1') {
                sh 'mvn sonar:sonar -Dsonar.login=b8f81399db39910c4a8481c9ba93188f7a5386cb'
@@ -48,13 +61,13 @@ pipeline {
                    }
          }
         
-             stage("PUBLISH TO NEXUS") {
+        stage("PUBLISH TO NEXUS") {
              steps {  
                 sh 'mvn deploy'
                    }
           }
         
-             stage('Building our image') { 
+            stage('Building our image') { 
              steps { 
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
@@ -66,25 +79,36 @@ pipeline {
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+                       dockerImage.push() 
                         }
                         } 
                    }
             }
-    
-           stage("Docker-compose") {
-                steps{
-                      sh 'docker-compose down'
-                      sh 'docker-compose up -d'
-                     }
-           }
-           stage('sending mail'){
-               steps {
-                     mail bcc: '', body: '''Hello from Jenkins,
-                     Devops Pipeline returned success.
-            Best Regards''', cc: '', from: ' sarah.khabthani@esprit.tn', replyTo: ' sarah.khabthani@esprit.tn', subject: 'Devops Pipeline', to: 'sarahkhabthani9@gmail.com'
-                     }
-           }
-        
+    }
+     post {
+
+        success {
+
+            emailext body: "The pipeline has completed successfully",
+
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+
+                subject: "Jenkins pipeline completed successfully",
+
+                to: "sarah.khabthani@esprit.tn"
+
+        }
+
+        failure {
+
+            emailext body: "The pipeline has failed",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                subject: "Jenkins pipeline failed",
+                to: "sarah.khabthani@esprit.tn"
+
+        }
+
+      
+
     }
 }
