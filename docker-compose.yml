@@ -11,7 +11,7 @@ version: "3"
    #     - /home/mysql/data:/var/lib/mysql
 
     spring_app:
-      image: ahlemjebali/achatimage
+      image: shirazbesrour/achatimage
       container_name: achatimage
       restart: on-failure
       ports:
