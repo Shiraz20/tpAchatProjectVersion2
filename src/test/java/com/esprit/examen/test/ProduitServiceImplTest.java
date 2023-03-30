@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.Produit;
-import com.esprit.examen.entities.Stock;
+
 import com.esprit.examen.repositories.CategorieProduitRepository;
 import com.esprit.examen.repositories.ProduitRepository;
 import com.esprit.examen.repositories.StockRepository;
