@@ -6,7 +6,10 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
+
+import org.apache.commons.logging.Log;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +30,8 @@ public class ProduitServiceimplTest {
     @Autowired
     private ProduitRepository produitRepository;
 
+    Logger logger  = Logger.getLogger( ProduitServiceimplTest.class.getName());
+
     @Test
     public void testRetrieveAllProduits() {
         Produit p1 = new Produit(null, "P001", "Produit 1", 10.0f, new Date(), null, null, null, null);
@@ -38,8 +43,8 @@ public class ProduitServiceimplTest {
         assertEquals(2, result.size());
         assertEquals("Produit 1", result.get(0).getLibelleProduit());
         assertEquals("Produit 2", result.get(1).getLibelleProduit());
-      //  log.info(" produit1 : " +result.get(0));
-     //   log.info(" produit2 : " +result.get(1));
+        logger.info(" produit1 : " +result.get(0));
+        logger.info(" produit2 : " +result.get(1));
     }
 
     @Test
@@ -49,7 +54,7 @@ public class ProduitServiceimplTest {
         Produit result = produitService.addProduit(p1);
         assertNotNull(result);
         assertEquals("Produit 1", result.getLibelleProduit());
-       // log.info(" produit : " +result);
+        logger.info(" produit : " +result);
     }
 
     @Test
@@ -60,7 +65,7 @@ public class ProduitServiceimplTest {
         produitService.deleteProduit(result2.getIdProduit());
         Produit result = produitService.retrieveProduit(result2.getIdProduit());
         assertNull(result);
-      //  log.info(" produit deleted : " +result2.getLibelleProduit());
+        logger.info(" produit deleted : " +result2.getLibelleProduit());
     }
 
 
@@ -72,7 +77,7 @@ public class ProduitServiceimplTest {
         Produit result = produitService.updateProduit(p1);
         assertNotNull(result);
         assertEquals("Produit 1", result.getLibelleProduit());
-       // log.info(" produit updated : " +result);
+        logger.info(" produit updated : " +result);
     }
 
     @Test
@@ -80,12 +85,12 @@ public class ProduitServiceimplTest {
         Long id = 1L;
         Produit p1 = new Produit(null,"P005", "Produit 1", 10.0f, new Date(), null, null, null, null);
         Produit result2 = produitService.addProduit(p1);
-      //  log.info(" result2 : " +result2.getIdProduit());
+        logger.info(" result2 : " +result2.getIdProduit());
         //when(produitRepository.findById(id)).thenReturn(java.util.Optional.of(p1));
         Produit result = produitService.retrieveProduit(result2.getIdProduit());
         assertNotNull(result);
         assertEquals("Produit 1", result.getLibelleProduit());
-       // log.info(" produit retrived : " +result);
+        logger.info(" produit retrived : " +result);
         produitService.deleteProduit(result.getIdProduit());
 
 

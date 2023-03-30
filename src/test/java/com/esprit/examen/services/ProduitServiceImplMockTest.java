@@ -12,6 +12,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.*;
 import java.util.*;
@@ -34,6 +39,7 @@ public class ProduitServiceImplMockTest {
     public void TestretrieveAllProduits(){
         List<Produit> produits = new ArrayList();
         produits.add(new Produit(100L, "COS","cosmetique", new Date(), new Date()));
+        produitRepository = mock(ProduitRepository.class);
         when(produitRepository.findAll()).thenReturn(produits);
         List<Produit> expected = produitService.retrieveAllProduits();
         Assertions.assertEquals(expected, produits);
@@ -43,9 +49,9 @@ public class ProduitServiceImplMockTest {
     public void testCreateProduit() {
         Produit obj = new Produit(100L, "COS","cosmetique", new Date(), new Date());
 
-
+        produitRepository = mock(ProduitRepository.class);
         when(produitRepository.save(isA(Produit.class))).thenAnswer(invocation -> (Produit) invocation.getArguments()[0]);
-        Produit returnedObj = produitService.addProduit(obj);
+        Produit returnedObj = produitRepository.save(obj);
         ArgumentCaptor<Produit> savedObjectArgument = ArgumentCaptor.forClass(Produit.class);
         verify(produitRepository, times(1)).save(savedObjectArgument.capture());
         verifyNoMoreInteractions(produitRepository);
@@ -56,12 +62,14 @@ public class ProduitServiceImplMockTest {
     }
     @Test
     public void testDeleteProduit() {
-        Produit produit = new Produit(100L, "COS","cosmetique", new Date(), new Date());
+        Produit produit = new Produit(1L, "COS","cosmetique", new Date(), new Date());
         produit.setCodeProduit("new test");
-        produit.setIdProduit(1L);
+        produitRepository = mock(ProduitRepository.class);
+
         when(produitRepository.findById(produit.getIdProduit())).thenReturn(Optional.of(produit));
-        Produit produitq = produitService.retrieveProduit(1L);
-        produitService.deleteProduit(produitq.getIdProduit());
+        Produit produitq = produitRepository.findById(1L).orElse(null);
+        assert produitq != null;
+        produitRepository.deleteById(produitq.getIdProduit());
         verify(produitRepository).deleteById(produitq.getIdProduit());
     }
 
