@@ -54,7 +54,7 @@ public class RèglementTestWithMock {
         assertEquals(2, ReglementService.retrieveAllReglements().size());
         System.out.println("Retrieve reglements works !");
     }
-//    oumayma
+//    oumayma ayadi
 }
 
 
