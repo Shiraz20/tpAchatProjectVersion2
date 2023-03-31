@@ -16,6 +16,7 @@ pipeline {
     
     stages {
         
+        
         stage ('Checkout git') {
             steps {
                 git branch: 'Devops-Facture' ,
