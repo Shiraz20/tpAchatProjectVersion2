@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Example;
+
 
 
 import static org.mockito.Matchers.isA;
